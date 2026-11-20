@@ -14,13 +14,30 @@
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:
 //   mkdir -p out && MAKEFUN_OUTPUT_DIR=out node main.ts
 
-import { cpSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildDossier } from './vendor/makefun-frontend.ts';
 
 const here = fileURLToPath(new URL('.', import.meta.url));
 const out = process.env.MAKEFUN_OUTPUT_DIR ?? '/output';
+
+// Hand-in self-check, written for this entry: the guide is only handed in when its
+// data is whole — 55 trophies, every one with a guide of its own, and 1 to 4 screenshots.
+const trophyDoc = JSON.parse(readFileSync(join(here, 'app', 'data', 'trophies.json'), 'utf8')) as {
+  trophies?: { name?: string; guide?: string }[];
+};
+const trophyList = trophyDoc.trophies ?? [];
+if (trophyList.length !== 55) throw new Error(`trophies.json holds ${trophyList.length} trophies, expected 55`);
+const unguided = trophyList.filter((t) => !t.guide || !t.guide.trim()).map((t) => t.name ?? '?');
+if (unguided.length) throw new Error(`trophies without a guide: ${unguided.join(', ')}`);
+const shotFiles = existsSync(join(here, 'screenshots'))
+  ? readdirSync(join(here, 'screenshots')).filter((f) => !f.startsWith('.'))
+  : [];
+if (shotFiles.length < 1 || shotFiles.length > 4) {
+  throw new Error(`screenshots holds ${shotFiles.length} images, expected 1 to 4`);
+}
+console.log(`handing in the GTA 6 trophy guide: ${trophyList.length} trophies, ${unguided.length} without a guide, ${shotFiles.length} screenshots`);
 
 mkdirSync(out, { recursive: true });
 cpSync(join(here, 'app'), join(out, 'app'), { recursive: true });

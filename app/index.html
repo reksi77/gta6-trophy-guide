@@ -1,25 +1,91 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>GTA 6 Trophy Guide — Leonida Checklist</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="hero">
+  <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; Offline guide &amp; tracker</p>
+  <h1>GTA 6 Trophy Guide</h1>
+  <p class="lede">Every one of the 55 official trophies, with a guide in plain words, the sources behind each fact, a roadmap to the platinum — and a checklist that remembers where you are.</p>
+  <div class="progress-wrap">
+    <div class="progress-bar"><div id="progressFill" class="progress-fill" style="width:0%"></div></div>
+    <p id="progressText" class="progress-text">0 / 55 trophies earned</p>
+  </div>
+  <p class="facts" id="platinumFacts"></p>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
+
+<main>
+  <section class="callout" id="missableCallout" aria-label="Missable warning">
+    <strong>&#9888; One trophy can be missed.</strong>
+    <span id="missableText">Loading…</span>
+  </section>
+
+  <section aria-labelledby="roadmapTitle">
+    <h2 id="roadmapTitle">Roadmap to the platinum</h2>
+    <ol class="roadmap" id="roadmapList"></ol>
+  </section>
+
+  <section aria-label="Filters" class="toolbar">
+    <input id="searchBox" type="search" placeholder="Search trophies, guides, missions…" aria-label="Search trophies">
+    <div class="chips" id="kindChips" role="group" aria-label="Filter by kind"></div>
+    <label class="field">Grade
+      <select id="gradeSelect">
+        <option value="all">All grades</option>
+        <option value="platinum">Platinum</option>
+        <option value="gold">Gold</option>
+        <option value="silver">Silver</option>
+        <option value="bronze">Bronze</option>
+      </select>
+    </label>
+    <label class="field">Sort
+      <select id="sortSelect">
+        <option value="default">List order</option>
+        <option value="grade">Grade, best first</option>
+        <option value="name">Name A–Z</option>
+        <option value="unearned">Unearned first</option>
+      </select>
+    </label>
+    <label class="toggle"><input id="spoilerToggle" type="checkbox"> Spoiler-safe: hide story trophies until earned</label>
+    <label class="toggle"><input id="earnedToggle" type="checkbox"> Earned only</label>
+    <div class="actions">
+      <button id="exportBtn" type="button">Export progress</button>
+      <button id="importBtn" type="button">Import progress</button>
+      <input id="importFile" type="file" accept="application/json,.json" hidden>
+      <button id="resetBtn" type="button" class="danger">Reset</button>
+    </div>
+  </section>
+
+  <p id="resultCount" class="result-count" aria-live="polite"></p>
+
+  <section aria-labelledby="trackersTitle">
+    <h2 id="trackersTitle">Count trackers</h2>
+    <p class="hint">Step a counter to its target and the matching trophy checks itself off.</p>
+    <div class="trackers" id="trackerGrid"></div>
+  </section>
+
+  <section aria-labelledby="listTitle">
+    <h2 id="listTitle">All 55 trophies</h2>
+    <div class="trophy-list" id="trophyList"></div>
+  </section>
+
+  <section aria-labelledby="sourcesTitle">
+    <h2 id="sourcesTitle">Where each fact comes from</h2>
+    <p class="hint">Every guide cites its sources. A specific location or step with no source earns no credit — so this table shows what backs what.</p>
+    <table class="sources">
+      <thead><tr><th>Source</th><th>Trophies backed</th></tr></thead>
+      <tbody id="sourceMatrix"></tbody>
+    </table>
+  </section>
+</main>
+
+<footer>
+  <p>Names, descriptions and grades are the official PlayStation 5 list as published by Exophase and PSNProfiles. Guides are written for this page in our own words and cite their sources; nothing is copied from another guide. No Rockstar artwork, logos or fonts. Works fully offline — your progress never leaves this browser.</p>
+</footer>
+
 <script type="module" src="app.js"></script>
 </body>
 </html>

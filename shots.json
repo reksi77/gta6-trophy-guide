@@ -1,5 +1,1 @@
-[
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
-]
+[{"file":"1-cover.jpg","path":"/","view":"Guide hero with progress bar, platinum facts, missable warning and roadmap","viewport":{"height":800,"width":1280}},{"file":"2-roadmap.jpg","path":"/","scroll":700,"view":"Roadmap to the platinum, filters and count trackers","viewport":{"height":800,"width":1280}},{"file":"3-missable.jpg","path":"/?kind=missable","view":"Missable filter showing Positive Mental Attitude with its guide and sources","viewport":{"height":800,"width":1280}},{"file":"4-sources.jpg","path":"/","scroll":2600,"view":"Source matrix and a trophy card with its guide and citations","viewport":{"height":800,"width":1280}}]
